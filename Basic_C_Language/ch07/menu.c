@@ -6,7 +6,8 @@ void input_member(int *korean, int *math, int *english, float *average,
                   int *stduent);
 void output_member(const float *average, int *student);
 void search_member(const float *average, int *student);
-void remove_member(int *korean, int *math, int *english, float *average);
+void remove_member(int *korean, int *math, int *english, float *average,
+                   int *student_count);
 
 int main(int argc, char *argv[]) {
   /*
@@ -21,7 +22,7 @@ int main(int argc, char *argv[]) {
   int choice;
   int kor[30] = {0}, math[30] = {0}, eng[30] = {0};
   float avg[30] = {0};
-  int student_count = 0, student_num;
+  int student_count = 0;
 
   do {
     printf("1. Input\n");
@@ -48,7 +49,7 @@ int main(int argc, char *argv[]) {
                            // or the lowest score student # and the score
       break;
     case 4:
-      remove_member(kor, math, eng, avg);
+      remove_member(kor, math, eng, avg, &student_count);
       break;
     case 5:
       printf("Quitting...\n");
@@ -114,10 +115,20 @@ void search_member(const float *average, int *student) {
   printf("Student #%d got the lowest average by %d\n", min_idx + 1, min);
 }
 
-void remove_member(int *korean, int *math, int *english, float *average) {
+void remove_member(int *korean, int *math, int *english, float *average,
+                   int *student_count) {
   int student_num;
   printf("Enter the Stduent# to remove the student\n");
   printf("--> ");
   scanf("%d", &student_num);
-  // memcpy to move the array from the arr[studnet_num-1];
+  memcpy(&korean[student_num - 1], &korean[student_num],
+         (30 - student_num - 2) * sizeof(int));
+  memcpy(&math[student_num - 1], &math[student_num],
+         (30 - student_num - 2) * sizeof(int));
+  memcpy(&english[student_num - 1], &english[student_num],
+         (30 - student_num - 2) * sizeof(int));
+  memcpy(&average[student_num - 1], &average[student_num],
+         (30 - student_num - 2) * sizeof(float));
+  printf("Studnet #%d is successfully removed from the list.\n", student_num);
+  *student_count -= 1;
 }
