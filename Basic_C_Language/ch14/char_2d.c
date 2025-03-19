@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
   int count = sizeof(names) / sizeof(names[0]);
   int i;
 
-  for (int i = 0; i < count; i++) {
+  for (i = 0; i < count; i++) {
     fgets(names[i], 20, stdin);
     // get rid of 'enter'
     names[i][strlen(names[i]) - 1] = '\0';
