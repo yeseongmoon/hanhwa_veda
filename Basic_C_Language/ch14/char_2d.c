@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 
   for (int i = 0; i < count; i++) {
     if (strcmp(s_name, names[i]) == 0)
-      printf("Name found on %d\n", i + 1);
+      printf("Name found on %dth on the array.\n", i + 1);
   }
 
   return 0;
