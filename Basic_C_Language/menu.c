@@ -1,45 +1,70 @@
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
-  /*
-   * menu program
-   * 1. select
-   * 2. print
-   * 3. search
-   * 4. delete
-   * 5. quit
-   * */
-  int choice;
+void input_member(void);
+void output_member(void);
+void search_member(void);
+void delete_member(void);
 
-  do {
-    printf("1.select\n");
-    printf("2.print\n");
-    printf("3.search\n");
-    printf("4.delete\n");
-    printf("5.quit\n");
-    printf("Enter your option: ");
-    scanf("%d", &choice);
+int main(void) {
+	int choice;
 
-    switch (choice) {
-    case 1:
-      printf("you select option #1\n");
-      break;
-    case 2:
-      printf("you select option #2\n");
-      break;
-    case 3:
-      printf("you select option #3\n");
-      break;
-    case 4:
-      printf("you select option #4\n");
-      break;
-    case 5:
-      printf("Quitting...\n");
-      return 0;
-    default:
-      printf("you select the wrong option\n");
-      break;
-    }
-  } while (choice != 5);
-  return 0;
+	printf("1. Input\n");
+	printf("2. Output\n");
+	printf("3. Search\n");
+	printf("4. Delete\n");
+	printf("5. Exit\n");
+
+	do {
+
+	printf(">> ");
+	scanf("%d", &choice);
+	switch (choice)
+	{
+	case 1:
+		input_member();
+		break;
+	case 2:
+		output_member();
+		break;
+	case 3:
+		search_member();
+		break;
+	case 4:
+		delete_member();
+
+		break;
+	case 5:
+		printf("You selected Exit\n");
+		return 0;
+	default:
+		printf("Please choose another number\n");
+
+	}
+	} while (choice != 5);
+
+	return 0;
+}
+
+// function definition
+void input_member(void) {
+	printf("You selected Input\n");
+	return;
+}
+
+// function definition
+void output_member(void) {
+	printf("You selected Output\n");
+	return;
+}
+
+// function definition
+void search_member(void) {
+	printf("You selected Search\n");
+	return;
+}
+
+// function definition
+void delete_member(void) {
+	printf("You selected Delete\n");
+	return;
 }
