@@ -5,6 +5,7 @@
 int main(int argc, char *argv[]) {
   char names[5][20];
   int count = sizeof(names) / sizeof(names[0]);
+  int i;
 
   for (int i = 0; i < count; i++) {
     fgets(names[i], 20, stdin);
@@ -13,7 +14,7 @@ int main(int argc, char *argv[]) {
   }
   printf("\n");
 
-  for (int i = 0; i < count; i++) {
+  for (i = 0; i < count; i++) {
     printf("%s", names[i]);
     printf("\n");
   }
@@ -23,9 +24,14 @@ int main(int argc, char *argv[]) {
   fgets(s_name, 20, stdin);
   s_name[strlen(s_name) - 1] = '\0';
 
-  for (int i = 0; i < count; i++) {
-    if (strcmp(s_name, names[i]) == 0)
+  for (i = 0; i < count; i++) {
+    if (strcmp(s_name, names[i]) == 0) {
       printf("Name found on %dth on the array.\n", i + 1);
+      break;
+    }
+  }
+  if (i == 5) {
+    printf("Name not found\n");
   }
 
   return 0;
