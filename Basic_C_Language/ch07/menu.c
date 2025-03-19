@@ -1,70 +1,123 @@
 #include <stdio.h>
+#include <string.h>
+#define _CRT_SECURE_NO_WARNINGS
 
-void input_member(void);
-void output_member(void);
-void search_member(void);
-void delete_member(void);
+void input_member(int *korean, int *math, int *english, float *average,
+                  int *stduent);
+void output_member(const float *average, int *student);
+void search_member(const float *average, int *student);
+void remove_member(int *korean, int *math, int *english, float *average);
 
-int main(void) {
-	int choice;
+int main(int argc, char *argv[]) {
+  /*
+   * menu program
+   * 1. input
+   * 2. print
+   * 3. search
+   * 4. delete
+   * 5. quit
+   * */
 
-	printf("1. Input\n");
-	printf("2. Output\n");
-	printf("3. Search\n");
-	printf("4. Delete\n");
-	printf("5. Exit\n");
+  int choice;
+  int kor[30] = {0}, math[30] = {0}, eng[30] = {0};
+  float avg[30] = {0};
+  int student_count = 0, student_num;
 
-	do {
+  do {
+    printf("1. Input\n");
+    printf("2. Print\n");
+    printf("3. Search\n");
+    printf("4. Delete\n");
+    printf("5. Quit\n");
+    printf("Enter your option: ");
+    scanf("%d", &choice);
 
-	printf(">> ");
-	scanf("%d", &choice);
-	switch (choice)
-	{
-	case 1:
-		input_member();
-		break;
-	case 2:
-		output_member();
-		break;
-	case 3:
-		search_member();
-		break;
-	case 4:
-		delete_member();
-
-		break;
-	case 5:
-		printf("You selected Exit\n");
-		return 0;
-	default:
-		printf("Please choose another number\n");
-
-	}
-	} while (choice != 5);
-
-	return 0;
+    switch (choice) {
+    case 1:
+      input_member(kor, math, eng, avg,
+                   &student_count); // call the function, edge case: if the
+                                    // input is -1, end the function
+      break;
+    case 2:
+      output_member(avg, &student_count); // num, avg
+      break;
+    case 3:
+      search_member(
+          avg,
+          &student_count); // either the highest score student # and the score
+                           // or the lowest score student # and the score
+      break;
+    case 4:
+      remove_member(kor, math, eng, avg);
+      break;
+    case 5:
+      printf("Quitting...\n");
+      return 0;
+    default:
+      printf("you select the wrong option\n");
+      break;
+    }
+  } while (choice != 5);
+  return 0;
 }
 
-// function definition
-void input_member(void) {
-	printf("You selected Input\n");
-	return;
+void input_member(int *korean, int *math, int *english, float *average,
+                  int *student) {
+  int k_score, m_score, e_score;
+  while (1) {
+    printf("Enter the score\n");
+    printf("Enter -1 if you want to go back to menu.\n");
+    printf("--> ");
+    scanf("%d", &k_score);
+    if (k_score == -1)
+      break;
+    scanf("%d%d", &m_score, &e_score);
+    if (k_score > 100 || k_score < 0)
+      printf("This is not a valid score. Try Again!\n");
+    else if (m_score > 100 || m_score < 0)
+      printf("This is not a valid score. Try Again!\n");
+    else if (e_score > 100 || e_score < 0)
+      printf("This is not a valid score. Try Again!\n");
+    else {
+      korean[*student] = k_score;
+      math[*student] = m_score;
+      english[*student] = e_score;
+      average[*student] = (float)(k_score + m_score + e_score) / 3;
+      *student += 1;
+    }
+  }
 }
 
-// function definition
-void output_member(void) {
-	printf("You selected Output\n");
-	return;
+void output_member(const float *average, int *student) {
+  for (int i = 0; i < *student; i++) {
+    printf("Student #%d's average score is %.2f\n", i + 1, average[i]);
+  }
 }
 
-// function definition
-void search_member(void) {
-	printf("You selected Search\n");
-	return;
+void search_member(const float *average, int *student) {
+  int max = average[0], max_idx = 0;
+  int min = average[0], min_idx = 0;
+  for (int i = 0; i < *student; i++) {
+    if (max < average[i]) {
+      max = average[i];
+      max_idx = i;
+    }
+  }
+
+  for (int i = 0; i < *student; i++) {
+    if (min > average[i]) {
+      min = average[i];
+      min_idx = i;
+    }
+  }
+  printf("Student #%d got the highest average by %d\n", max_idx + 1, max);
+  printf("Student #%d got the lowest average by %d\n", min_idx + 1, min);
 }
 
-// function definition
-void delete_member(void) {
-	printf("You selected Delete\n");
-	return;
+void remove_member(int *korean, int *math, int *english, float *average) {
+  int student_num;
+  printf("Enter the Stduent# to remove the student\n");
+  printf("--> ");
+  scanf("%d", &student_num);
+  // memcpy to move the array from the arr[studnet_num-1];
 }
