@@ -1,4 +1,7 @@
-3
+6
 eddy 10
-peter 20
-john 30
+john 20
+peter 30
+david 40
+aj 50
+dan 99
