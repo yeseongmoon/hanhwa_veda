@@ -85,7 +85,7 @@ void search_member(char (*name)[30], char (*addr)[100], int *count) {
 }
 
 void remove_member(char (*name)[30], char (*addr)[100], int *count) {
-  char *input_name;
+  char input_name[30];
   while (1) {
     printf("Enter the name you would like to delete: ");
     scanf("%s", input_name);
