@@ -22,6 +22,8 @@ int main(int argc, char *argv[]) {
     printf("%d ", ptr[i]);
   }
   printf("\n");
+
+  // very important
   // have a habit to free the memory
   free(ptr);
   return 0;
