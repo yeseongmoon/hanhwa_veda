@@ -18,9 +18,10 @@ int main(int argc, char *argv[]) {
     ptr[count] = input;
     count++;
   }
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < count; i++) {
     printf("%d ", ptr[i]);
   }
   printf("\n");
+  free(ptr);
   return 0;
 }

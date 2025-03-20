@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
   }
   printf("\n");
 
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n * 2; i++) {
     printf("**p: %d ", **ptr + i);
   }
   printf("\n");
