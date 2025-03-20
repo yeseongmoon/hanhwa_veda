@@ -8,7 +8,6 @@ int main(int argc, char *argv[]) {
   double d1 = 763.4567, d2 = 567.9234;
   // when using void pointer, you have to know how big the variable's memory
   // type is
-  // void *vp;
 
   printf("given integers : %d %d\n", n1, n2);
   swap_func(&n1, &n2, 1);
