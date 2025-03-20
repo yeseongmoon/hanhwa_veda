@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
   int choice;
   char names[20][30], address[20][100];
-  void (*fp[4])(char(*name)[30], char(*addr)[100], int *count) = {
+  void (*fp[4])(char(*name)[30], char(*addr)[100], int *) = {
       input_member, output_member, search_member, remove_member};
   int ppl_count = 0;
 
@@ -69,6 +69,7 @@ void output_member(char (*name)[30], char (*addr)[100], int *count) {
 
 void search_member(char (*name)[30], char (*addr)[100], int *count) {
   char input_name[30];
+  int i;
   while (1) {
     printf("What name are you looking for? ");
     scanf("%s", input_name);
@@ -76,16 +77,21 @@ void search_member(char (*name)[30], char (*addr)[100], int *count) {
       printf("Finished searching\n");
       break;
     }
-    for (int i = 0; i < *count; i++) {
-      if (strcmp(name[i], input_name) == 0)
+    for (i = 0; i < *count; i++) {
+      if (strcmp(name[i], input_name) == 0) {
         printf("Name found on %dth on the list, and his/her address is %s\n",
                i + 1, addr[i]);
+        break;
+      }
     }
+    if (i == *count)
+      printf("Name not found\n");
   }
 }
 
 void remove_member(char (*name)[30], char (*addr)[100], int *count) {
   char input_name[30];
+  int i;
   while (1) {
     printf("Enter the name you would like to delete: ");
     scanf("%s", input_name);
@@ -93,7 +99,7 @@ void remove_member(char (*name)[30], char (*addr)[100], int *count) {
       printf("Finish removing\n");
       break;
     }
-    for (int i = 0; i < *count; i++) {
+    for (i = 0; i < *count; i++) {
       if (strcmp(name[i], input_name) == 0) {
         memcpy(name[i], name[i + 1], (*count - (i + 1)) * sizeof(name[0]));
         memcpy(addr[i], addr[i + 1], (*count - (i + 1)) * sizeof(addr[0]));
@@ -101,6 +107,9 @@ void remove_member(char (*name)[30], char (*addr)[100], int *count) {
         printf("Done removing\n");
         break;
       }
+    }
+    if (i == *count) {
+      printf("Name not found\n");
     }
   }
 }
