@@ -1,0 +1,4 @@
+3
+eddy 10
+peter 20
+john 30
