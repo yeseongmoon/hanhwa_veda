@@ -3,7 +3,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 int main(int argc, char *argv[]) {
+  // this can waste a lot of memory spaces
   char names[5][20];
+  // instead, you can use pointer array and assign string arrays to the pointer
+  // array
+  char *name[5];
   int count = sizeof(names) / sizeof(names[0]);
   int i;
 
