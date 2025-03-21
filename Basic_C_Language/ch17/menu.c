@@ -27,9 +27,9 @@ int main(int argc, char *argv[]) {
 
   food *head = NULL, *tail = NULL;
 
-  int choice, food_num = 0;
+  int choice;
 
-  while (1) {
+  do {
     printf("1. Input\n");
     printf("2. Print\n");
     printf("3. Search\n");
@@ -37,15 +37,6 @@ int main(int argc, char *argv[]) {
     printf("5. Quit\n");
     printf("Enter your option: ");
     scanf("%d", &choice);
-
-    if (choice < 1 || choice > 5) {
-      printf("Invalid input\n");
-      break;
-    }
-    if (choice == 5) {
-      printf("Quitting...\n");
-      break;
-    }
 
     switch (choice) {
     case 1:
@@ -63,13 +54,16 @@ int main(int argc, char *argv[]) {
     case 5:
       printf("Quitting...\n");
       break;
+    default:
+      printf("Wrong input. Try again!\n");
+      break;
     }
-  }
+  } while (choice != 5);
   return 0;
 }
 
 void input_menu(food **first, food **end) {
-  food *st_ptr = NULL;
+  food *tmp = NULL;
   char input_name[20];
   float food_price;
   while (1) {
@@ -80,15 +74,15 @@ void input_menu(food **first, food **end) {
     }
     printf("Please enter the price: ");
     scanf("%f", &food_price);
-    st_ptr = malloc(sizeof(food));
-    strcpy(st_ptr->food_name, input_name);
-    st_ptr->price = food_price;
-    st_ptr->next = NULL;
+    tmp = malloc(sizeof(food));
+    strcpy(tmp->food_name, input_name);
+    tmp->price = food_price;
+    tmp->next = NULL;
 
     if (*first == NULL) {
-      *first = *end = st_ptr;
+      *first = *end = tmp;
     } else {
-      (*end)->next = st_ptr;
+      (*end)->next = tmp;
       *end = (*end)->next;
     }
   }
@@ -97,7 +91,7 @@ void input_menu(food **first, food **end) {
 void output_menu(food *list) {
   food *tmp = list;
   if (tmp == NULL) {
-    printf("There is no food on the list.\n");
+    printf("The list is empty.\n");
   }
   while (tmp != NULL) {
     printf("Name: %s, price: %.2f\n", tmp->food_name, tmp->price);
@@ -110,6 +104,10 @@ void search_menu(food *list) {
   int found = 0;
   while (1) {
     food *tmp = list;
+    if (tmp == NULL) {
+      printf("The list is empty.\n");
+      break;
+    }
     int i = 0;
     printf("What food are you looking for?(x to exit) ");
     scanf("%s", input_name);
@@ -138,12 +136,11 @@ void remove_menu(food **first, food **end) {
   int found = 0;
   while (1) {
     food *prev = NULL;
-    food *prev_prev = NULL;
     food *tmp = NULL;
     int count = 0;
-    prev = prev_prev = tmp = *first;
+    prev = tmp = *first;
     if (*first == NULL) {
-      printf("The food list is empty.\n");
+      printf("The list is empty.\n");
       break;
     }
     printf("Enter the food name you would like to delete:(x to exit) ");
@@ -160,20 +157,24 @@ void remove_menu(food **first, food **end) {
       prev = tmp;
       tmp = prev->next;
     }
-    // delete head
-    if (*first == tmp) {
-      *first = tmp->next;
-    }
+    if (found == 0) {
+      printf("The food name is not existed on the list.\n");
+    } else {
+      // delete head
+      if (*first == tmp) {
+        *first = tmp->next;
+      }
 
-    if (tmp != NULL) {
-      prev->next = tmp->next;
-      free(tmp);
-    }
+      if (tmp != NULL) {
+        prev->next = tmp->next;
+        free(tmp);
+      }
 
-    // delete tail
-    if (tmp == *end) {
-      *end = prev;
-      prev->next = NULL;
+      // delete tail
+      if (tmp == *end) {
+        *end = prev;
+        prev->next = NULL;
+      }
     }
   }
 }
