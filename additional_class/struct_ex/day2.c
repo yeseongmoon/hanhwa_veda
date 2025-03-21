@@ -8,27 +8,38 @@ typedef struct {
 
 double calc_avg(Student *student, const int size) {
   int sum = 0;
-  for (int i = 0; i < size - 1; i++) {
+  for (int i = 0; i < size; i++) {
     sum += student[i].score;
   }
-  return (double)sum / (size - 1);
+  return (double)sum / (size);
 }
 
-void input_scores(Student *student, const int size) {
-  Student new_student;
+Student *add_student(Student *student, int *size) {
+  Student *new_student = NULL;
 
-  printf("학생 %d의 이름: ", size);
-  scanf("%s", new_student.name);
-  printf("학생 %d의 점수: ", size);
-  scanf("%d", &new_student.score);
+  if (*size == 0) {
+    new_student = (Student *)malloc(sizeof(Student));
+    printf("학생 %d의 이름: ", *size + 1);
+    scanf("%s", new_student[*size].name);
+    printf("학생 %d의 점수: ", *size + 1);
+    scanf("%d", &new_student[*size].score);
+    printf("\n");
 
-  student[size - 1] = new_student;
+    return new_student;
+  }
 
+  new_student = realloc(student, sizeof(Student) * (*size + 1));
+  printf("학생 %d의 이름: ", *size + 1);
+  scanf("%s", new_student[*size].name);
+  printf("학생 %d의 점수: ", *size + 1);
+  scanf("%d", &new_student[*size].score);
   printf("\n");
+
+  return new_student;
 }
 
 void print_scores(Student *student, const int size) {
-  for (int i = 0; i < size - 1; i++) {
+  for (int i = 0; i < size; i++) {
     printf("%s : %d\n", student[i].name, student[i].score);
   }
   printf("\n");
@@ -47,16 +58,15 @@ Student *load_data(int *size) {
     for (int i = 0; i < *size; i++) {
       fscanf(fptr, "%s %d", temp[i].name, &temp[i].score);
     }
-    (*size)++;
   }
   fclose(fptr);
   return temp;
 }
 
 int main(int argc, char *argv[]) {
-  int size = 1, menu_input, data_write = 0;
-  double avg;
-  Student *students = (Student *)malloc(sizeof(Student));
+  int size = 0, data_write = 0, menu_input;
+  double avg = 0;
+  Student *students = NULL;
   Student *temp = load_data(&size);
   FILE *fptr;
   if (temp != NULL)
@@ -73,20 +83,14 @@ int main(int argc, char *argv[]) {
 
     switch (menu_input) {
     case 1:
-      if (size == 1) {
-        input_scores(students, size);
-        ++size;
-      } else {
-        students = realloc(students, sizeof(Student) * size);
-        input_scores(students, size);
-        ++size;
-      }
+      students = add_student(students, &size);
+      size++;
       data_write = 1;
       break;
 
     case 2:
       printf("학생 목록:\n");
-      if (size == 1)
+      if (size == 0)
         printf("입력된 학생 정보가 없습니다.\n");
       else {
         print_scores(students, size);
@@ -111,8 +115,8 @@ int main(int argc, char *argv[]) {
         printf("파일이 로드되지 않았습니다.\n");
         exit(0);
       }
-      fprintf(fptr, "%d\n", size - 1);
-      for (int i = 0; i < size - 1; i++) {
+      fprintf(fptr, "%d\n", size);
+      for (int i = 0; i < size; i++) {
         fprintf(fptr, "%s %d\n", students[i].name, students[i].score);
       }
       fclose(fptr);
