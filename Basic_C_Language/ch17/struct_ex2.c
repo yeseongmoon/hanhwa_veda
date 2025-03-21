@@ -49,8 +49,8 @@ int main(int argc, char *argv[]) {
       printf("%s %d\n", st_ptr->name, st_ptr->kor);
       st_ptr = st_ptr->next;
     }
-    printf("head : %s, %d\n", head->name, head->kor);
-    printf("tail : %s, %d\n", tail->name, tail->kor);
+    /*printf("head : %s, %d\n", head->name, head->kor);*/
+    /*printf("tail : %s, %d\n", tail->name, tail->kor);*/
   } else
     printf("Linked list is empty\n");
 
@@ -65,9 +65,10 @@ int main(int argc, char *argv[]) {
   }
 
   while (st_ptr != NULL) {
-    if (st_ptr->next->next == NULL) {
+    if (idx + 1 == count) {
       st_ptr->next = NULL;
       tail = st_ptr;
+      break;
     }
     if ((idx + 1) == remove_idx)
       st_ptr->next = st_ptr->next->next;
@@ -81,8 +82,8 @@ int main(int argc, char *argv[]) {
     printf("%s %d\n", st_ptr->name, st_ptr->kor);
     st_ptr = st_ptr->next;
   }
-  printf("head : %s, %d\n", head->name, head->kor);
-  printf("tail : %s, %d\n", tail->name, tail->kor);
+  /*printf("head : %s, %d\n", head->name, head->kor);*/
+  /*printf("tail : %s, %d\n", tail->name, tail->kor);*/
 
   return 0;
 }
