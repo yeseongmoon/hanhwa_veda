@@ -12,7 +12,7 @@ struct st {
 
 int main(int argc, char *argv[]) {
   struct st *st_ptr = NULL, *head = NULL, *tail = NULL;
-  char input, empty = 1;
+  char input, empty = 1, count = 1;
   while (1) {
     printf("Do you want to add a list? y/n: ");
     scanf("%c", &input);
@@ -39,6 +39,7 @@ int main(int argc, char *argv[]) {
         tail->next = st_ptr;
         tail = tail->next;
       }
+      count++;
     }
   }
   if (empty == 0) {
@@ -52,6 +53,36 @@ int main(int argc, char *argv[]) {
     printf("tail : %s, %d\n", tail->name, tail->kor);
   } else
     printf("Linked list is empty\n");
+
+  printf("Which list would you want to remove?: ");
+  int remove_idx, idx = 1;
+  scanf("%d", &remove_idx);
+  st_ptr = head;
+
+  if (remove_idx == 1) {
+    st_ptr = st_ptr->next;
+    head = st_ptr;
+  }
+
+  while (st_ptr != NULL) {
+    if (st_ptr->next->next == NULL) {
+      st_ptr->next = NULL;
+      tail = st_ptr;
+    }
+    if ((idx + 1) == remove_idx)
+      st_ptr->next = st_ptr->next->next;
+    st_ptr = st_ptr->next;
+    idx++;
+  }
+
+  st_ptr = head;
+  printf("Linked List: \n");
+  while (st_ptr != NULL) {
+    printf("%s %d\n", st_ptr->name, st_ptr->kor);
+    st_ptr = st_ptr->next;
+  }
+  printf("head : %s, %d\n", head->name, head->kor);
+  printf("tail : %s, %d\n", tail->name, tail->kor);
 
   return 0;
 }
