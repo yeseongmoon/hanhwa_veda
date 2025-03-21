@@ -34,8 +34,7 @@ int main(int argc, char *argv[]) {
       st_ptr->next = NULL;
 
       if (head == NULL) {
-        head = st_ptr;
-        tail = st_ptr;
+        head = tail = st_ptr;
       } else {
         tail->next = st_ptr;
         tail = tail->next;
@@ -52,9 +51,6 @@ int main(int argc, char *argv[]) {
     printf("tail : %s, %d\n", tail->name, tail->kor);
   } else
     printf("Linked list is empty\n");
-
-  // tail->next = st_ptr
-  // tail = tail->next;
 
   return 0;
 }
