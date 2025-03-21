@@ -60,30 +60,32 @@ int main(int argc, char *argv[]) {
   st_ptr = head;
 
   if (remove_idx == 1) {
-    st_ptr = st_ptr->next;
-    head = st_ptr;
-  }
-
-  while (st_ptr != NULL) {
-    if (idx + 1 == count) {
-      st_ptr->next = NULL;
-      tail = st_ptr;
-      break;
+    if (st_ptr->next != NULL) {
+      st_ptr = st_ptr->next;
+      head = st_ptr;
     }
-    if ((idx + 1) == remove_idx)
-      st_ptr->next = st_ptr->next->next;
-    st_ptr = st_ptr->next;
-    idx++;
-  }
+  } else {
+    while (st_ptr != NULL) {
+      if (st_ptr->next->next == NULL) {
+        st_ptr->next = NULL;
+        tail = st_ptr;
+        break;
+      }
+      if ((idx + 1) == remove_idx)
+        st_ptr->next = st_ptr->next->next;
+      st_ptr = st_ptr->next;
+      idx++;
+    }
 
-  st_ptr = head;
-  printf("Linked List: \n");
-  while (st_ptr != NULL) {
-    printf("%s %d\n", st_ptr->name, st_ptr->kor);
-    st_ptr = st_ptr->next;
+    st_ptr = head;
+    printf("Linked List: \n");
+    while (st_ptr != NULL) {
+      printf("%s %d\n", st_ptr->name, st_ptr->kor);
+      st_ptr = st_ptr->next;
+    }
+    printf("head : %s, %d\n", head->name, head->kor);
+    printf("tail : %s, %d\n", tail->name, tail->kor);
   }
-  /*printf("head : %s, %d\n", head->name, head->kor);*/
-  /*printf("tail : %s, %d\n", tail->name, tail->kor);*/
 
   return 0;
 }
