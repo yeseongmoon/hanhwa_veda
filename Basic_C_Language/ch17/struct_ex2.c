@@ -43,6 +43,7 @@ int main(int argc, char *argv[]) {
   }
   if (empty == 0) {
     struct st *temp = head;
+    printf("Linked List: \n");
     while (temp != NULL) {
       printf("%s %d\n", temp->name, temp->kor);
       temp = temp->next;
