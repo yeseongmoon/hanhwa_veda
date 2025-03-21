@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
     head = tmp->next;
   }
 
-  if (tmp == NULL) {
+  if (tmp == tail) {
     tail = st_ptr;
     st_ptr->next = NULL;
   } else {

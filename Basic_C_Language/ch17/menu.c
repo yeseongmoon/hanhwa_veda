@@ -96,12 +96,12 @@ void input_menu(food **first, food **end) {
 
 void output_menu(food *list) {
   food *tmp = list;
+  if (tmp == NULL) {
+    printf("There is no food on the list.\n");
+  }
   while (tmp != NULL) {
     printf("Name: %s, price: %.2f\n", tmp->food_name, tmp->price);
     tmp = tmp->next;
-  }
-  if (tmp == NULL) {
-    printf("There is no food on the list.\n");
   }
 }
 
@@ -160,14 +160,19 @@ void remove_menu(food **first, food **end) {
       prev = tmp;
       tmp = prev->next;
     }
+    // delete head
     if (*first == tmp) {
       *first = tmp->next;
     }
+
     if (tmp != NULL) {
       prev->next = tmp->next;
       free(tmp);
     }
-    if (tmp == NULL) {
+
+    // delete tail
+    if (tmp == *end) {
+      *end = prev;
       prev->next = NULL;
     }
   }
