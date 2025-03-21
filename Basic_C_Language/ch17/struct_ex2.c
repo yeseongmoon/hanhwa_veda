@@ -42,11 +42,11 @@ int main(int argc, char *argv[]) {
     }
   }
   if (empty == 0) {
-    struct st *temp = head;
+    st_ptr = head;
     printf("Linked List: \n");
-    while (temp != NULL) {
-      printf("%s %d\n", temp->name, temp->kor);
-      temp = temp->next;
+    while (st_ptr != NULL) {
+      printf("%s %d\n", st_ptr->name, st_ptr->kor);
+      st_ptr = st_ptr->next;
     }
     printf("head : %s, %d\n", head->name, head->kor);
     printf("tail : %s, %d\n", tail->name, tail->kor);
