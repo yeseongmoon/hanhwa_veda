@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
       if (st_ptr->next->next == NULL) {
         st_ptr->next = NULL;
         tail = st_ptr;
+        tail->next = NULL;
         break;
       }
       if ((idx + 1) == remove_idx)
