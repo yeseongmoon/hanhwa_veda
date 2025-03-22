@@ -72,6 +72,7 @@ void input_menu(food **first, food **end) {
     if (strcmp(input_name, "x") == 0) {
       break;
     }
+
     printf("Please enter the price: ");
     scanf("%f", &food_price);
     tmp = malloc(sizeof(food));
@@ -89,6 +90,7 @@ void input_menu(food **first, food **end) {
 }
 
 void output_menu(food *list) {
+  // if the head is NULL, stop the printing out process.
   food *tmp = list;
   if (tmp == NULL) {
     printf("The list is empty.\n");
@@ -101,80 +103,82 @@ void output_menu(food *list) {
 
 void search_menu(food *list) {
   char input_name[30];
-  int found = 0;
+  int idx, found;
+  food *tmp = NULL;
   while (1) {
-    food *tmp = list;
+    tmp = list;
+
+    // if the head is NULL, stop the searching process.
     if (tmp == NULL) {
       printf("The list is empty.\n");
       break;
     }
-    int i = 0;
+    found = idx = 0;
     printf("What food are you looking for?(x to exit) ");
     scanf("%s", input_name);
-    getchar();
     if (strcmp(input_name, "x") == 0) {
       printf("Finished searching\n");
       break;
     }
     while (tmp != NULL) {
       if (strcmp(tmp->food_name, input_name) == 0) {
-        printf("Food is found! %dth on the list\n", i + 1);
+        printf("Food is found! #%d on the list\n", idx + 1);
         printf("Its price: %.2f\n", tmp->price);
         found = 1;
       }
-      i++;
+      idx++;
       tmp = tmp->next;
     }
     if (found == 0) {
-      printf("Food not found on the list.\n");
+      printf("NUFood not found on the list.\n");
     }
   }
 }
 
 void remove_menu(food **first, food **end) {
+  food *prev = NULL, *tmp = NULL;
   char input_name[20];
-  int found = 0;
   while (1) {
-    food *prev = NULL;
-    food *tmp = NULL;
-    int count = 0;
     prev = tmp = *first;
+
+    // if the head is NULL, stop the removing process.
     if (*first == NULL) {
       printf("The list is empty.\n");
       break;
     }
+
     printf("Enter the food name you would like to delete:(x to exit) ");
     scanf("%s", input_name);
     if (strcmp(input_name, "x") == 0) {
       printf("Finish removing\n");
       break;
     }
-    while (1) {
+    while (tmp != NULL) {
       if (strcmp(tmp->food_name, input_name) == 0) {
-        found = 1;
         break;
       }
       prev = tmp;
       tmp = prev->next;
     }
-    if (found == 0) {
+
+    if (*first == tmp) {
+      printf("%s is removed from the list.\n", tmp->food_name);
+      *first = tmp->next;
+    }
+
+    else if (tmp == *end) {
+      *end = prev;
+      printf("%s is removed from the list.\n", tmp->food_name);
+      prev->next = NULL;
+    }
+
+    else if (tmp != NULL) {
+      printf("%s is removed from the list.\n", tmp->food_name);
+      prev->next = tmp->next;
+    }
+
+    else {
       printf("The food name is not existed on the list.\n");
-    } else {
-      // delete head
-      if (*first == tmp) {
-        *first = tmp->next;
-      }
-
-      if (tmp != NULL) {
-        prev->next = tmp->next;
-        free(tmp);
-      }
-
-      // delete tail
-      if (tmp == *end) {
-        *end = prev;
-        prev->next = NULL;
-      }
     }
   }
 }
