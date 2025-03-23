@@ -202,6 +202,7 @@ void remove_menu(food **first, food **end) {
       // immediate freeing memory to prevent from potential memory leak &
       // wasting memory
       free(curr);
+      curr = NULL;
     }
   }
 }
