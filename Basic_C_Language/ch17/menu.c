@@ -59,6 +59,15 @@ int main(int argc, char *argv[]) {
       break;
     }
   } while (choice != 5);
+
+  // free memory
+  food *tmp;
+  while (head != NULL) {
+    tmp = head;
+    head = head->next;
+    free(tmp);
+  }
+  head = tail = NULL;
   return 0;
 }
 
