@@ -107,7 +107,7 @@ void output_menu(food *list) {
   else {
     food *tmp = list;
     while (tmp != NULL) {
-      printf("Name: %s, price: %.2f\n", tmp->food_name, tmp->price);
+      printf("Name: %s, Price: %.2f\n", tmp->food_name, tmp->price);
       tmp = tmp->next;
     }
   }
@@ -203,6 +203,13 @@ void remove_menu(food **first, food **end) {
       // wasting memory
       free(curr);
       curr = NULL;
+
+      food *tmp = *first;
+      printf("Updated menu list:\n");
+      while (tmp != NULL) {
+        printf("Name: %s, Price: %.2f\n", tmp->food_name, tmp->price);
+        tmp = tmp->next;
+      }
     }
   }
 }
