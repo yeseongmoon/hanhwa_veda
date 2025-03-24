@@ -204,6 +204,7 @@ void remove_menu(food **first, food **end) {
       free(curr);
       curr = NULL;
 
+      // for convenience
       food *tmp = *first;
       printf("Updated menu list:\n");
       while (tmp != NULL) {
