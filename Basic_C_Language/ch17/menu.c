@@ -87,6 +87,10 @@ void input_menu(food **first, food **end) {
     scanf("%f", &food_price);
     tmp = malloc(sizeof(food));
     strcpy(tmp->food_name, input_name);
+    if (tmp == NULL) {
+      fprintf(stderr, "Memory allocation failed\n");
+      continue;
+    }
     tmp->price = food_price;
     tmp->next = NULL;
 
