@@ -235,7 +235,7 @@ void load(food **first, food **end) {
         fprintf(stderr, "Memory allocation failed\n");
         break;
       }
-      int i = fread(tmp, sizeof(food), 1, fp);
+      size_t i = fread(tmp, sizeof(food), 1, fp);
       if (i == 0) {
         free(tmp);
         tmp = NULL;
