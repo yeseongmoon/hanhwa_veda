@@ -4,13 +4,13 @@
 
 union ipaddr {
   // order matters
-  unsigned char each[4];
   unsigned int all;
+  unsigned char each[4];
 };
 
 int main(int argc, char *argv[]) {
-  union ipaddr ip;
-  ip.all = 0x12345678;
+  union ipaddr ip = {0x12345678};
+  // ip.all = 0x12345678;
   printf("size %lu\n", sizeof(ip));
   printf("ip each: ");
   for (int i = 0; i < 4; i++) {
