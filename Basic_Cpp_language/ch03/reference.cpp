@@ -10,8 +10,12 @@ void swap(int &a, int &b) {
 
 int main(int argc, char *argv[]) {
   int n = 10;
-  // reference can only be assigned with variables,
+
+  // NOTE: : reference can only be assigned with variables,
   // but if it's const, it can be e.g. const int &r = 50;
+  // If you dont want to modify the reference varaiables,
+  // there's no need to use reference variables
+
   // int &r = n;
   int m = 50;
   // r = m;
