@@ -2,8 +2,8 @@
 
 const long double km_per_mile = 1.609344L;
 
-long double operator"" _km(long double val) { return val; }
-long double operator"" _mi(long double val) { return val * km_per_mile; }
+long double operator""_km(long double val) { return val; }
+long double operator""_mi(long double val) { return val * km_per_mile; }
 
 int main(int argc, char *argv[]) {
   long double distance_1 = 1.0_km;
