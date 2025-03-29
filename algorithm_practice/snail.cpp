@@ -1,15 +1,51 @@
 #include <iostream>
+#include <vector>
 
-int main(int argc, char *argv[]) {
-  int size, input_num, last_num, arr_length;
-  std::cin >> size >> input_num;
-  arr_length = size, last_num = size * size;
-  int arr[size][size];
+int main() {
+  int arr_size, target_num;
+  std::cin >> arr_size >> target_num;
 
-  // filling order: down, right, up, and left
+  std::vector<std::vector<int>> arr(arr_size, std::vector<int>(arr_size));
+
+  int last_num = arr_size * arr_size;
+  int row = -1, col = 0, arr_length = arr_size;
+
   while (1) {
-    for (int i = 0; i < arr_length; i++) {
-      arr[0][0] = last_num;
+    // Down
+    for (int i = 0; i < arr_length; i++)
+      arr[++row][col] = last_num--;
+    if (--arr_length == 0)
+      break;
+
+    // Right
+    for (int i = 0; i < arr_length; i++)
+      arr[row][++col] = last_num--;
+
+    // Up
+    for (int i = 0; i < arr_length; i++)
+      arr[--row][col] = last_num--;
+    if (--arr_length == 0)
+      break;
+
+    // Left
+    for (int i = 0; i < arr_length; i++)
+      arr[row][--col] = last_num--;
+  }
+
+  // Print matrix
+  for (int i = 0; i < arr_size; i++) {
+    for (int j = 0; j < arr_size; j++) {
+      std::cout << arr[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+
+  // Find target number
+  for (int i = 0; i < arr_size; i++) {
+    for (int j = 0; j < arr_size; j++) {
+      if (arr[i][j] == target_num) {
+        std::cout << i + 1 << " " << j + 1 << std::endl;
+      }
     }
   }
 
