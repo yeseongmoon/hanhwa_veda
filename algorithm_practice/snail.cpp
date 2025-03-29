@@ -1,11 +1,14 @@
 #include <iostream>
-#include <vector>
+
+const int MAX_SIZE = 999;
+int arr[MAX_SIZE * MAX_SIZE];
 
 int main() {
+  std::ios::sync_with_stdio(0);
+  std::cin.tie(0);
+
   int arr_size, target_num;
   std::cin >> arr_size >> target_num;
-
-  std::vector<std::vector<int>> arr(arr_size, std::vector<int>(arr_size));
 
   int last_num = arr_size * arr_size;
   int row = -1, col = 0, arr_length = arr_size;
@@ -13,39 +16,39 @@ int main() {
   while (1) {
     // Down
     for (int i = 0; i < arr_length; i++)
-      arr[++row][col] = last_num--;
+      arr[++row * arr_size + col] = last_num--;
+
     if (--arr_length == 0)
       break;
 
     // Right
     for (int i = 0; i < arr_length; i++)
-      arr[row][++col] = last_num--;
+      arr[row * arr_size + (++col)] = last_num--;
 
     // Up
     for (int i = 0; i < arr_length; i++)
-      arr[--row][col] = last_num--;
+      arr[--row * arr_size + col] = last_num--;
     if (--arr_length == 0)
       break;
 
     // Left
     for (int i = 0; i < arr_length; i++)
-      arr[row][--col] = last_num--;
+      arr[row * arr_size + (--col)] = last_num--;
   }
 
   // Print matrix
   for (int i = 0; i < arr_size; i++) {
     for (int j = 0; j < arr_size; j++) {
-      std::cout << arr[i][j] << " ";
+      std::cout << arr[i * arr_size + j] << " ";
     }
-    std::cout << std::endl;
+    std::cout << "\n";
   }
 
   // Find target number
-  for (int i = 0; i < arr_size; i++) {
-    for (int j = 0; j < arr_size; j++) {
-      if (arr[i][j] == target_num) {
-        std::cout << i + 1 << " " << j + 1 << std::endl;
-      }
+  for (int i = 0; i < arr_size * arr_size; i++) {
+    if (arr[i] == target_num) {
+      std::cout << (i / arr_size) + 1 << " " << (i % arr_size) + 1 << std::endl;
+      break;
     }
   }
 
