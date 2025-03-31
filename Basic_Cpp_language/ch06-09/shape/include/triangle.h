@@ -1,18 +1,18 @@
 #ifndef _TRIANGLE_H_
 #define _TRIANGLE_H_
 
-#include <iostream>
+#include "shape.h"
 
-class Triangle {
+class Triangle : public Shape {
   int base;
   int height;
 
 public:
   Triangle();
-  Triangle(int base, int height);
-  ~Triangle();
-  // void show();
-  int get_area();
+  Triangle(int base, int height, std::string color);
+  virtual ~Triangle();
+  void show() override;
+  int getArea() override;
   Triangle operator+(const Triangle &o) const;
   Triangle operator-(const Triangle &o) const;
   Triangle &operator+=(const Triangle &o);

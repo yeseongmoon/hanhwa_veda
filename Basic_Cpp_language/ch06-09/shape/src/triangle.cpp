@@ -1,23 +1,32 @@
 #include "triangle.h"
 
 Triangle::Triangle() : base(10), height(20) {
-  // std::cout << "Constructor\n";
+  // std::cout << "Triangle's Constructor\n";
 }
 
-Triangle::Triangle(int base, int height) {
-  // std::cout << "Constructor\n";
+// NOTE: : You can do either Shape(color) or this->color = color.
+Triangle::Triangle(int base, int height, std::string color) : Shape(color) {
+  // std::cout << "Triangle's Constructor with arguments\n";
+  //  NOTE: : if color is private member, child class cannot access the data.
+  //          if it is private member, then it can only be initialized with
+  //          Shape(color)
+
+  // this->color = color;
   this->base = base;
   this->height = height;
 }
 
-Triangle::~Triangle() { this->base = 0, this->height = 0; }
+Triangle::~Triangle() { // std::cout << "Triangle's Destructor\n";
+}
 
-// void Triangle::show() {
-//   std::cout << "base: " << base << std::endl;
-//   std::cout << "height: " << height << std::endl;
-// }
+void Triangle::show() {
+  std::cout << "Triangle Show\n";
+  std::cout << "base: " << base << std::endl;
+  std::cout << "height: " << height << std::endl;
+  std::cout << "color: " << color << std::endl;
+}
 
-int Triangle::get_area() { return (base * height) / 2; }
+int Triangle::getArea() { return (base * height) / 2; }
 
 Triangle Triangle::operator+(const Triangle &o) const {
   Triangle tmp;
