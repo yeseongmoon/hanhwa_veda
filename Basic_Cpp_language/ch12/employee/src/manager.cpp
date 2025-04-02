@@ -27,15 +27,15 @@ void PayCostManager::addPayCost(int type, int pay, int empNumber, string name,
   // type 3 : 영업사원, payInfo : 월 매출액
 
 void PayCostManager::showAllPayCost() const {
-  for (int i = 0; i < empList.size(); i++) {
-    empList[i]->showSalary();
+  for (auto it = empList.begin(); it != empList.end(); it++) {
+    (*it)->showSalary();
   }
 } // 모든 사원 급여정보 확인 함수
 
 void PayCostManager::showTotalPayCost() const {
   double total_pay;
-  for (int i = 0; i < empList.size(); i++) {
-    total_pay += empList[i]->getPay();
+  for (auto it = empList.begin(); it != empList.end(); it++) {
+    total_pay += (*it)->getPay();
   }
   cout << "Total Pay: " << total_pay << endl;
 } // 총 지출해야 할 급여 확인 함수
