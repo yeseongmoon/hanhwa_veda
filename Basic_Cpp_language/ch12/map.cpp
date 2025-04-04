@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <set>
 
 int main(int argc, char *argv[]) {
   std::multimap<std::string, int> scores;

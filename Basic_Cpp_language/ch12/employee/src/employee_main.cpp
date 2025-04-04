@@ -1,6 +1,5 @@
-#include <string>
-using namespace std;
 #include "manager.h"
+#include <string>
 
 int main(void) {
   PayCostManager m;

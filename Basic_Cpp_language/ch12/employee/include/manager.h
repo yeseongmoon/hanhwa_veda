@@ -1,11 +1,14 @@
 #ifndef _MANAGER_H_
 #define _MANAGER_H_
 #include "employee.h"
+#include <memory>
 #include <vector>
 
 class PayCostManager {
 private:
-  std::vector<Employee *> empList; // 사원 정보 관리 배열, 최대 인원 50명
+  // std::vector<Employee *> empList; // 사원 정보 관리 배열, 최대 인원 50명
+  std::vector<std::unique_ptr<Employee>> empList;
+
 public:
   PayCostManager();
   ~PayCostManager();
