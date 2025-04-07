@@ -2,6 +2,7 @@
 #include "regular.h"
 #include "sales.h"
 #include "temporary.h"
+#include <algorithm>
 
 PayCostManager::PayCostManager() {}
 PayCostManager::~PayCostManager() {}
@@ -37,3 +38,10 @@ void PayCostManager::showTotalPayCost() const {
   }
   cout << "Total Pay: " << total_pay << endl;
 } // 총 지출해야 할 급여 확인 함수
+
+void PayCostManager::getBonus() const {
+  for_each(empList.begin(), empList.end(),
+           [](const std::unique_ptr<Employee> &e) {
+             std::cout << (e->getPay() * 0.5) << std::endl;
+           });
+}

@@ -19,5 +19,6 @@ public:
                                     // type 3 : 영업사원, payInfo : 월 매출액
   void showAllPayCost() const;      // 모든 사원 급여정보 확인 함수
   void showTotalPayCost() const;    // 총 지출해야 할 급여 확인 함수
+  void getBonus() const;
 };
 #endif

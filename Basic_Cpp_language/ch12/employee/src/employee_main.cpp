@@ -20,6 +20,8 @@ int main(void) {
 
   m.showAllPayCost();
   m.showTotalPayCost();
+  // FIX: can you fix this not adding another function to the class?
+  m.getBonus();
 
   //
   // for (int i = 0; i < 10; i++)
