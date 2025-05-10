@@ -3,6 +3,7 @@ Basic_C_Language/test.c
 *.out
 *.o
 myshell/myshell
+!myshell/Makefile
 
 # Created by https://www.toptal.com/developers/gitignore/api/cmake
 # Edit at https://www.toptal.com/developers/gitignore?templates=cmake
