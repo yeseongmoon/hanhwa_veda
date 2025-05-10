@@ -2,8 +2,8 @@ Basic_C_Language/test.c
 .DS_Store
 *.out
 *.o
-lsnp/*
-!lsnp/**
+lsnp/**
+!lsnp/**/
 !lsnp/**/*.c
 !lsnp/**/*.h
 !lsnp/myshell/Makefile
