@@ -2,9 +2,9 @@ Basic_C_Language/test.c
 .DS_Store
 *.out
 *.o
-lsnp/*
-!lsnp/*.c
-!lsnp/*.h
+lsnp/**
+!lsnp/**/*.c
+!lsnp/**/*.h
 !lsnp/myshell/Makefile
 
 # Created by https://www.toptal.com/developers/gitignore/api/cmake
