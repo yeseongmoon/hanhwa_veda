@@ -1,0 +1,16 @@
+CC = gcc
+CFLAGS = -I /usr/include -c
+LDFLAGS = -L usr/lib -lcrypt -lwiringPi -lwiringPiDev -lpthread
+
+OBJS = wiringmusic.o
+SRCS = $(OBJS:.o=.c)
+
+music : $(OBJS)
+	$(CC) -o $@ $(OBJS) $(LDFLAGS)
+	~/scp.sh $@
+
+wiringmusic.o: wiringmusic.c
+	$(CC) $(CFLAGS) $(SRCS)
+
+clean:
+	rm rpi $(OBJS)
