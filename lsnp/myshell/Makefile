@@ -1,4 +1,4 @@
-OBJS = main.o parsing.o isbuiltin.o cmd_linux.o child_handler.o redirect.o
+OBJS = main.o parsing.o isbuiltin.o cmd_linux.o child_handler.o redirect.o pipe.o
 SRCS = $(OBJS:.o=.c)
 
 myshell: $(OBJS)

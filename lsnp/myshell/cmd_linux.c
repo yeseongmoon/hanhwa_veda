@@ -2,14 +2,10 @@
 
 void cmd_linux(char **arglist) {
   pid_t pid;
-  int back_flag, redirect_flag, pos;
-  back_flag = redirect_flag = FLAG_OFF;
+  int back_flag, pos;
 
   if (is_background(arglist)) {
     back_flag = FLAG_ON;
-  }
-  if ((pos = is_redirect(arglist)) > 0) {
-    redirect_flag = FLAG_ON;
   }
 
   switch (pid = fork()) {
@@ -20,13 +16,15 @@ void cmd_linux(char **arglist) {
   case 0:
     signal(SIGINT, SIG_DFL);
     signal(SIGQUIT, SIG_DFL);
-    if (redirect_flag == FLAG_ON) {
-      redirect(arglist, pos);
+    redirect(arglist);
+    if ((pos = is_pipe(arglist)) > 0) {
+      custom_pipe(arglist, pos);
+    } else {
+      execvp(arglist[0], arglist);
+      perror("execlp");
+      exit(1);
+      break;
     }
-    execvp(arglist[0], arglist);
-    perror("execlp");
-    exit(1);
-    break;
   default:
     if (back_flag == FLAG_OFF) {
       waitpid(pid, NULL, 0);
@@ -46,10 +44,10 @@ int is_background(char **arglist) {
   return 0;
 }
 
-int is_redirect(char **arglist) {
-  for (int i = 0; arglist[i] != NULL; i++)
-    if ((strcmp(arglist[i], ">") == 0) || (strcmp(arglist[i], "<") == 0) ||
-        (strcmp(arglist[i], ">>") == 0))
+int is_pipe(char **arglist) {
+  for (int i = 0; arglist[i] != NULL; i++) {
+    if (strcmp(arglist[i], "|") == 0)
       return i;
+  }
   return 0;
 }

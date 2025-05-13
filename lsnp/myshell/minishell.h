@@ -7,6 +7,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#define MAXSIZE 4096
+
 char **command_parse(char *);
 void command_freelist(char **);
 int is_builtin(char **);
@@ -23,5 +25,7 @@ void pwd_function(char **);
 void cd_function(char **);
 int is_background(char **);
 int is_redirect(char **);
+int is_pipe(char **);
 void child_handler(int);
-void redirect(char **, int);
+void redirect(char **);
+void custom_pipe(char **, int);
