@@ -1,0 +1,31 @@
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+void *thread_function(void *args);
+
+int main(int argc, char *argv[]) {
+  int status;
+  pthread_t a_thread;
+  void *thread_result;
+  status = pthread_create(&a_thread, NULL, thread_function, (void *)NULL);
+  if (status != 0) {
+    perror("pthread_create");
+    exit(1);
+  }
+  void *ret_value;
+  sleep(2);
+  pthread_cancel(a_thread);
+  pthread_join(a_thread, &ret_value);
+  return 0;
+}
+
+void *thread_function(void *args) {
+  // pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+  pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
+  printf("this is thread_function\n");
+  sleep(10);
+  printf("thread_function is end\n");
+  pthread_exit("Hello, thread");
+}
