@@ -32,6 +32,7 @@ void *musicPlay(void *arg) {
     softToneWrite(SPKR, notes[i]);
     delay(280);
   }
+  softToneWrite(SPKR, 0);
   return NULL;
 }
 
@@ -47,13 +48,22 @@ int main() {
     printf(" --> ");
     scanf("%d", &input);
     if (input == 1) {
-      pthread_create(&thread, NULL, control_led, "ON");
+      if (pthread_create(&thread, NULL, control_led, "ON") != 0) {
+        perror("pthread_create");
+        exit(1);
+      }
       pthread_join(thread, NULL);
     } else if (input == 2) {
-      pthread_create(&thread, NULL, control_led, "OFF");
+      if (pthread_create(&thread, NULL, control_led, "OFF") != 0) {
+        perror("pthread_create");
+        exit(1);
+      }
       pthread_join(thread, NULL);
     } else if (input == 3) {
-      pthread_create(&thread, NULL, musicPlay, NULL);
+      if (pthread_create(&thread, NULL, musicPlay, NULL) != 0) {
+        perror("pthread_create");
+        exit(1);
+      }
       pthread_join(thread, NULL);
     } else if (input == 4) {
       break;
