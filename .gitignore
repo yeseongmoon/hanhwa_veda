@@ -4,6 +4,7 @@ Basic_C_Language/test.c
 *.o
 lsnp/**
 !lsnp/**/
+!lsnp/**/Makefile
 !lsnp/**/*.c
 !lsnp/**/*.h
 !lsnp/myshell/Makefile
