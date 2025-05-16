@@ -1,3 +1,4 @@
+#include <dlfcn.h>
 #include <pthread.h>
 #include <softTone.h>
 #include <stdio.h>
@@ -15,15 +16,18 @@ int notes[] = {391, 391,    440,    440,    391,    391,    329.63, 329.63,
                391, 391,    440,    440,    391,    391,    329.63, 329.63,
                391, 329.63, 293.66, 329.63, 261.63, 261.63, 261.63, 0};
 
-void *control_led(void *arg) {
-  pinMode(GPIO18, OUTPUT);
-  if (strcmp(arg, "ON") == 0) {
-    digitalWrite(GPIO18, 1);
-    delay(200);
-  } else {
-    digitalWrite(GPIO18, 0);
-    delay(200);
+typedef void (*FUNC)(int);
+void *led_thread(void *arg) {
+  int input = *(int *)arg;
+  FUNC ledfunc;
+  void *handle = dlopen("/home/veda/libled.so", RTLD_LAZY);
+  if (handle == NULL) {
+    perror("dlopen");
+    exit(1);
   }
+  ledfunc = (FUNC)dlsym(handle, "control_led");
+  ledfunc(input);
+  dlclose(handle);
   return NULL;
 }
 
@@ -74,14 +78,8 @@ int main() {
     printf(" 1. ON\n 2. OFF\n 3. Play Music\n 4. Read CDS sensor\n 5. EXIT\n");
     printf(" --> ");
     scanf("%d", &input);
-    if (input == 1) {
-      if (pthread_create(&thread, NULL, control_led, "ON") != 0) {
-        perror("pthread_create");
-        exit(1);
-      }
-      pthread_join(thread, NULL);
-    } else if (input == 2) {
-      if (pthread_create(&thread, NULL, control_led, "OFF") != 0) {
+    if (input == 1 || input == 2) {
+      if (pthread_create(&thread, NULL, led_thread, &input) != 0) {
         perror("pthread_create");
         exit(1);
       }
