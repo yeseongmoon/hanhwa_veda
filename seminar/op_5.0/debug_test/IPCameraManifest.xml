@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest>
+    <appName>debug_test</appName>
+    <appLocation>/home/wisenet/eclipse-workspace</appLocation>
+    <appVersion>1.0</appVersion>
+    <minSDK>5.00</minSDK>
+    <targetSDK>5.00</targetSDK>
+    <maxSDK>5.00</maxSDK>
+    <debug>true</debug>
+    <vendor>Hanwha Techwin</vendor>
+    <description/>
+    <platform>
+        <model>TNO7180</model>
+        <videoEncoding>
+            <codec>H.264</codec>
+            <resolution>1920 X 1080</resolution>
+            <frameRate>30</frameRate>
+            <compression>1</compression>
+            <bitRate>8192</bitRate>
+            <audio>false</audio>
+        </videoEncoding>
+        <rawVideo>
+            <format>NV 12</format>
+            <resolution>1920 X 1080</resolution>
+            <frameRate>1</frameRate>
+        </rawVideo>
+    </platform>
+    <permissions>
+        1. Device
+        2. SDCard
+    </permissions>
+    <vaEvents/>
+    <appConfigData>
+        <portNo>8080</portNo>
+    </appConfigData>
+</manifest>

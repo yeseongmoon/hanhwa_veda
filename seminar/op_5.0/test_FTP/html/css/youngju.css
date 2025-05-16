@@ -1,0 +1,145 @@
+@charset 'utf-8';
+
+div.event-search select.wid_01 {
+	width:180px;
+	height:22px;
+	margin-left:40px;
+	margin-bottom:20px;
+	padding:3px 0 0 5px;
+	background-color:#868fa3;
+	color:#1c1c1c;
+	border:none;
+}
+div.event-search {
+	width:260px;
+	padding:20px 10px;
+}
+	div.search_01 {
+		overflow:hidden;
+		width:260px;
+		margin-bottom:10px;
+	}
+		div.search_01 input {
+			float:left;
+		}
+		div.search_01 div.flt_01 {
+			float:left;
+			margin-left:3px;
+		}
+		div.search_01 .plt3 {
+			width:89px;
+		}
+.select_box_type2 {
+	width:88px;
+}
+input.mag3 {
+	margin-left:3px;
+}
+div.search_02 table {
+	width:260px;
+	margin-bottom:10px;
+}
+	div.search_02 table td a {
+		display:inline-block;
+		width:100%;
+		height:29px;
+		color:#C6C9CE;
+	}
+	div.search_02 table td a:focus,
+	div.search_02 table td a:hover,
+	div.search_02 table td a:active {
+		background:#25558d;
+	}
+	div.search_02 table td.rad a {
+		color:#ff6666;
+	}
+	div.search_02 table td.blue a {
+		color:#50a2ff;
+	}
+	div.search_02 table th {
+		height:29px;
+		border:1px solid #2b313e;
+		background-color:#1b2029;
+		color:#868fa3;
+	}
+		div.search_02 table td {
+			height:29px;
+			border:1px solid #2b313e;
+			background-color:#353c4b;
+			color:#c6c9ce;
+			text-align:center;
+		}
+			div.search_02 table td.rad {
+				color:#ff6666;
+			}
+			div.search_02 table td.blue {
+				color:#50a2ff;
+			}
+			div.search_02 table td.gray {
+				color:#616773;
+			}
+			div.search_02 table td.blue01 {
+				color:#3d5b81;
+			}
+div.search_03 {
+	overflow:hidden;
+	width:260px;
+	padding-left:9px;
+}
+	div.search_03 h2 {
+		float:left;
+		color:#c6c9ce;
+	}
+.select_box_type3 {
+	float:left;
+	margin:0 26px 0 7px;
+	width:73px;
+}
+
+/*search*/
+a.wit_01 {
+	width:242px;
+	margin-top:20px;
+}
+div.plb297 {
+	margin: 0;
+	padding-bottom:120px;
+}
+div.priv_box {
+	width:280px;
+	height:32px;
+	background-color:#252a35;
+	text-align:center;
+	padding-top:18px;
+}
+	div.priv_box a{
+		margin-right:20px;
+	}
+	div.priv_box a.end {
+		margin-right:0px;
+	}
+div.search-volume {
+	overflow:hidden;
+	width:260px;
+	padding:9px 10px 18px 10px;
+	background-color:#252a35;
+	border-top:1px solid #2b313e;
+}
+	div.volume div.volume-btn02 {
+		width:260px;
+	}
+		div.volume div.volume-btn02 div.minus span.point {
+			color:#54afff;
+		}
+
+	div.volume div.volume-btn03 {
+		width:220px;
+	}
+div.priv_box div.priv_box01 a {
+	display:inline-block;
+}
+
+.div.box01 {
+	width:260px;
+	background-color:#1b2029;
+}

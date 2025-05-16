@@ -1,0 +1,103 @@
+<html>    
+    <head>
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        <title>test_FTP</title>
+        
+        <link rel="stylesheet" type="text/css" href="css/include.css" />
+
+<script type="text/javascript" src="/home/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/home/js/common_function.js"></script>
+<script type="text/javascript" src="/home/js/x.js"></script>
+<script type="text/javascript" src="/home/js/json2xml.js"></script>
+<script type="text/javascript" src="/home/js/xml2json.js"></script>
+<script type="text/javascript" src="/home/js/SDKApi.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	isSupportedBrowser();
+              
+	//Value Change based on current Application Name
+	var appName = "test_FTP";
+	var appStatus;
+	getApplicationStatus();
+	
+	$("#appButton").click(function () {
+		if (appStatus == 2 || appStatus == 6) {
+			$(this).startApplication({
+				appname: appName,
+				success: function (param) {
+	 				$("#appButton").attr("value", "Stop Application");
+	 				appStatus = 4;
+	 				alert("Application Started");
+	 				location.reload();
+				},
+				error: function (errorMsg) {
+	 				alert(errorMsg);
+				}
+			});
+		} else if (appStatus == 4 || appStatus == 5) {
+			$(this).stopApplication({
+				appname: appName,
+				success: function (param) {
+	 				appStatus = 6;
+	 				$("#appButton").attr("value", "Start Application");
+	 				alert("Application Stopped");
+	 				location.reload();
+				},
+				error: function (errorMsg) {
+	 				alert(errorMsg);
+				}
+			});
+		}
+	});
+	function getApplicationStatus(){
+		$(document).getApplicationStatus({
+			appname: appName,
+			success: function (param) {
+				appStatus = param.AppStatus;
+				if (appStatus == 0 || appStatus == -1) {
+					$("#appButton").attr("disabled", "true");
+					$("#updateButton").attr("disabled", "true");
+		 		} else if (appStatus == 2 || appStatus == 6) {
+		  			$("#appButton").attr("value", "Start Application");
+		 		} else if (appStatus == 4 || appStatus == 5) {
+		  			$("#appButton").attr("value", "Stop Application");
+		 		}
+			}
+		});
+	}
+});
+</script>
+    </head>
+    
+    <body>
+        <div id="header">
+             <h1 >test_FTP</h1>
+        </div>
+        <div id="page-wrap">
+            <div id="main-sidebar">
+                <div class="leftpaneldeveloperconsole">
+                    <h4><img src="images/settings.png">SETTINGS</h4>
+                    <div class="seperationline"></div>
+                    <br/>
+                    <br/>
+                    <input class="sbtn2" type="button" id="appButton" value="Start Application" />
+                    <input class="sbtn2" type="button" id="updateButton" value="Update Settings" />
+                    </br>
+                    </br>
+	            <div width="100%"align="center"><img style="width:64px;height:64px" src="images/logo.png"/></div>
+                </div>
+            </div>
+            <div id="main-content">
+                <div id="div_streaming_uri" style="visibility: hidden">
+                     <h4 style="color:#fff;">LIVE STREAMING VIDEO</h4>
+
+                    <br/>
+                    <img id="streaming_uri" width="640" height="480" src="" style=" border: 2px solid #0C73D2; -webkit-box-shadow: 0px 0px 25px #fff; -moz-box-shadow: 0px 0px 25px #fff; box-shadow: 0px 0px 25px 
+#fff; margin: 0 auto;width: 55%;"></img>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

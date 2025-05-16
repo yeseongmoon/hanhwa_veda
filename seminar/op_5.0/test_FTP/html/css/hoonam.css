@@ -1,0 +1,253 @@
+@charset 'utf-8';
+
+.time_search {
+	margin-top:19px;
+}
+.h2_box {
+	overflow:hidden;
+	width:261px;
+	margin:0 0 10px 18px;
+}
+	.h2_box h2 {
+		margin:0 0 10px 5px;
+		color:#fff;
+	}
+.search_select {
+	display:inline-block;
+	overflow:hidden;
+	width:70px;
+	height:22px;
+	float:left;
+	margin:0 3px 10px 0;
+}
+.calender {
+	overflow:hidden;
+	width:21px;
+	float:left;
+	height:19px;
+}
+	.calender a:active,
+	.calender a:focus,
+	.calender a:hover {
+		border:0;
+	}
+		.calender a:active img,
+		.calender a:focus img {
+			margin-top:-38px;
+		}
+		.calender a:hover img {
+			margin-top:-19px;
+		}
+.year_box {
+	overflow:hidden;
+	position:relative;
+	width:70px;
+	height:22px;
+	background-color:#868fa3;
+	color:#1c1c1c;
+	font-weight:bold;
+}
+	.year_box ul.year_list {
+		float:left;
+		height:22px;
+		margin-left:8px;
+	}
+		.year_box ul.year_list li {
+			line-height:22px;
+		}
+	.year_box .year_arrow {
+		float:right;
+		position:absolute;
+		top:5px;
+		right:8px;
+	}
+		.year_box .year_arrow a {
+			overflow:hidden;
+			display:block;
+			width:7px;
+			height:6px;
+			background:url('../images/search/common/icon/icon_arrow.gif') no-repeat 0 0;
+			text-indent:-9999em;
+		}
+		.year_box .year_arrow a.next {
+			background-position:0 -6px;
+		}
+.select_box {
+	width:70px;
+	height:22px;
+	border:0;
+	background-color:#868fa3;
+	color:#1c1c1c;
+	font-weight:bold;
+}
+a.search {
+	float:left;
+	width:216px;
+	margin-right:3px;
+	color:#fff;
+	background-color:#36567b;
+	vertical-align:top;
+	text-align:center;
+	line-height:25px;
+}
+	a.search:hover {
+		color:#fff;
+		background-color:#4179b9;
+		text-decoration:none;
+	}
+	a.search:active, 
+	a.search:focus {
+		color:#fff;
+		background-color:#0b76d5;
+		text-decoration:none;
+	}
+.arrow {
+	float:left;
+}
+.time_search_list {
+	overflow:hidden;
+	width:280px;
+	border-top:1px solid #1b2029;
+}
+ul.list_box_2depth {
+	float:left;
+}
+	ul.list_box_2depth li {
+		overflow:hidden;
+		width:245px;
+		padding:6px 0 6px 19px;
+		margin-bottom:0;
+		border-bottom:1px solid #1b2029;
+		background-color:#252a35;
+	}
+		ul.list_box_2depth li img {
+			float:left;
+			margin-top:13px;
+		}
+		ul.list_box_2depth li span {
+			float:left;
+			margin:0 20px;
+			color:#fff;
+			font-weight:bold;
+			line-height:48px;
+		}
+		ul.list_box_2depth li ul.list_box_3depth {
+			float:left;
+		}
+ul.list_box_3depth li {
+	width:153px;
+	padding:0;
+	margin-bottom:0;
+	border:0;
+	line-height:16px;
+	color:#c6c9ce;
+}
+ul.list_box_3depth li.li_3depth {
+	color:#6699cc;
+}
+.scroll {
+	position:relative;
+	float:right;
+	height:426px;
+	background:url('../images/search/common/icon/bg_scroll.gif') repeat-y 0 0;
+}
+	.scroll a.up {
+		position:absolute;
+		top:0;
+		left:0;
+	}
+	.scroll a.dw {
+		position:absolute;
+		bottom:0;
+		left:0;
+	}
+.scroll_tract {
+	position:relative;
+	width:16px;
+	}
+	.scroll_tract a.scollbar {
+		position:absolute;
+		top:15px;
+		left:2px;
+	}
+.paging {
+	overflow:hidden;
+	margin-bottom:8px;
+	padding:10px;
+	background-color:#252a35;
+}
+	.paging a {
+		float:left;
+		margin-right:3px;
+	}
+	.paging span {
+		float:left;
+		margin:0 20px;
+		vertical-align:top;
+		line-height:20px;
+	}
+		.paging span strong {
+			color:#54afff;
+		}
+a.backup {
+	display:inline-block;
+	width:75px;
+	margin-left:10px;
+	color:#fff;
+	background-color:#656e83;
+	line-height:20px;
+	vertical-align:top;
+	text-align:center;
+}
+	a.backup:hover {
+		color:#fff;
+		text-decoration:none;
+	}
+.graph_time {
+	margin:30px 0 10px 30px;
+	color:#c6c9ce;
+}
+	.graph_time span {
+		margin-right:19px;
+	}
+.graph {
+	width:671px;
+	margin-left:9px;
+}
+	.graph a {
+		float:left;
+		width:22px;
+	}
+.graph_bar {
+	float:left;
+	position:relative;
+	width:575px;
+	height:41px;
+	background:url('../images/search/common/icon/bg_graph.gif') no-repeat 0 0;
+}
+.graph_bar_2depth {
+	position:absolute;
+	top:1px;
+	left:0;
+}
+.graph_type2 {
+	left:144px;
+}
+.graph_type3 {
+	left:288px;
+}
+.graph_type4 {
+	top:-3px;
+	left:94px;
+}
+	.graph_type4 p {
+		color:#fff;
+	}
+.zoom {
+	float:left;
+	width:36px;
+	margin-left:16px;
+}
+	.zoom a {
+		margin-bottom:1px;
+	}
