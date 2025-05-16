@@ -8,7 +8,7 @@ lsnp/**
 !lsnp/**/*.c
 !lsnp/**/*.h
 !lsnp/myshell/Makefile
-seminar/wop_5.00.tar
+seminar/
 
 # Created by https://www.toptal.com/developers/gitignore/api/cmake
 # Edit at https://www.toptal.com/developers/gitignore?templates=cmake
