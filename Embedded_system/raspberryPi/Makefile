@@ -22,4 +22,4 @@ rpi.o: rpi.c
 	$(CC) $(CFLAGS) $(SRCS)
 
 clean:
-	rm rpi $(OBJS)
+	rm rpi lib*.so $(OBJS)
