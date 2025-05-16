@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <wiringPi.h>
+#include <wiringPiI2C.h>
 
 #define GPIO18 18
 #define SPKR 25 /* GPIO25 */
@@ -36,15 +37,41 @@ void *musicPlay(void *arg) {
   return NULL;
 }
 
+void *startCDS(void *arg) {
+  int fd;
+  int a2dChannel = 0;
+  int prev, a2dVal;
+  int threshold = 180;
+
+  if ((fd = wiringPiI2CSetupInterface("/dev/i2c-1", 0x48)) < 0) {
+    perror("wiringPiI2CSetupInterface");
+    exit(1);
+  }
+
+  while (1) {
+    wiringPiI2CWrite(fd, 0x00 | a2dChannel);
+    prev = wiringPiI2CRead(fd);
+    a2dVal = wiringPiI2CRead(fd);
+    if (a2dVal < threshold) {
+      printf("Bright!\n");
+      musicPlay(NULL);
+    } else {
+      printf("Dark!\n");
+    }
+    delay(1000);
+  }
+  return NULL;
+}
+
 int main() {
-  pthread_t thread;
+  pthread_t thread, CDS_thread;
   int input;
   if (wiringPiSetupGpio() == -1)
     return -1;
 
   while (1) {
     printf(" ------ MENU ------\n");
-    printf(" 1. ON\n 2. OFF\n 3. Play Music\n 4. EXIT\n");
+    printf(" 1. ON\n 2. OFF\n 3. Play Music\n 4. Read CDS sensor\n 5. EXIT\n");
     printf(" --> ");
     scanf("%d", &input);
     if (input == 1) {
@@ -66,6 +93,13 @@ int main() {
       }
       pthread_join(thread, NULL);
     } else if (input == 4) {
+      if (pthread_create(&CDS_thread, NULL, startCDS, NULL) != 0) {
+        perror("pthread_create");
+        exit(1);
+      }
+
+      pthread_join(CDS_thread, NULL);
+    } else if (input == 5) {
       break;
     }
   }
