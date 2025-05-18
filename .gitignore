@@ -3,6 +3,7 @@ Basic_C_Language/test.c
 *.out
 *.o
 lsnp/**
+lsnp/self-learning-cs2
 !lsnp/**/
 !lsnp/**/Makefile
 !lsnp/**/*.c
