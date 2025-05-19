@@ -2,15 +2,24 @@ CC = gcc
 CFLAGS = -I /usr/include -c
 LDFLAGS = -L usr/lib -lcrypt -lwiringPi -lwiringPiDev -lpthread
 
-OBJS = wiringmusic.o
+OBJS = rpi.o
 SRCS = $(OBJS:.o=.c)
 
-music : $(OBJS)
+all: rpi led
+
+led: control_led.o
+	$(CC) -shared -o lib$@.so $<
+	~/scp.sh lib$@.so
+
+control_led.o: control_led.c
+	$(CC) -c -fPIC $<
+
+rpi : $(OBJS)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 	~/scp.sh $@
 
-wiringmusic.o: wiringmusic.c
+rpi.o: rpi.c
 	$(CC) $(CFLAGS) $(SRCS)
 
 clean:
-	rm rpi $(OBJS)
+	rm rpi lib*.so $(OBJS)
