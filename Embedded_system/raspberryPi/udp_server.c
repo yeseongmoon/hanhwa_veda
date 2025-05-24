@@ -1,4 +1,5 @@
 #include <arpa/inet.h>
+#include <asm-generic/socket.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,6 +14,15 @@ int main(int argc, char *argv[]) {
     perror("socket");
     exit(1);
   }
+
+  int optval = 1;
+
+  if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval)) ==
+      -1) {
+    perror("setsockopt");
+    exit(1);
+  }
+
   struct sockaddr_in server_addr, client_addr;
   server_addr.sin_family = AF_INET;
   server_addr.sin_port = htons(60000);
