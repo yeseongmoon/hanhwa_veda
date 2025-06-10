@@ -36,7 +36,10 @@ main:
 	b	.L2
 .L4:
   ldr r2, [r7, #4]
-  movs r2, r2 mod 3
+  movs r1, #3
+  udiv r3, r2, r1
+  muls r3, r3, r1
+  subs r2, r2, r3 cmp r2, #0
   cmp r2, #0
   beq .L6
 .L3:
@@ -60,7 +63,10 @@ main:
 	@ sp needed
 	pop	{r7, pc}
 .L6:
-	.align	2
+  ldr r3, =message    @ Load address of the message string
+  mov r0, r3          @ Set r0 = pointer to the message
+  bl printf           @ Call printf
+  b .L3               @ Continue to common path to increment and loopL5:
 .L5:
 	.word	.LC0-(.LPIC0+4)
 	.size	main, .-main
